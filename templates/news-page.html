@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/news-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <div style="width: 1240px;margin: auto;">
+        <div class="news-title" style="float: left;height: 30px;">Новини</div>
+        <form method="post" class="search-form">
+            {% csrf_token %}
+            <input type="date" name="date" required style="border: 1px solid;">
+            <button>пошук</button>
+        </form>
+    </div>
+    <div style="display: flex;flex-wrap: wrap;justify-content: center;width: 1260px;
+    margin: auto;">
+        {% for new in news %}
+            <div class="new" onclick="location.href='{% url 'new_page' new.id %}'">
+                <div style="width: 400px;height: 400px;">
+                    <img src="{{ new.img.url }}">
+                </div>
+                <div class="new-time">{{ new.time }}</div>
+                <div class="new-title">{{ new.title }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

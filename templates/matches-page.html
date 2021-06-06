@@ -1,0 +1,37 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/matches-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <div class="matches">
+        {% for math in matches %}
+            <div class="match">
+                <span class="status">
+                    {% if math.future_match %}
+                        майбутній
+                    {% else %}
+                        минулий
+                    {% endif %}
+                </span>
+                <div class="match-name">{{ math.name }}</div>
+                <div class="match-date">{{ math.date }}</div>
+                <hr style="border: 2px solid;">
+                <div style="display: flex;">
+                    <div class="team-side">
+                        <img src="{{ math.team1.img.url }}">
+                        <div>{{ math.team1.name }}</div>
+                    </div>
+                    <div class="score"><span>{{ math.score_team_1 }}</span></div>
+                    <div class="score"><span>:</span></div>
+                    <div class="score"><span>{{ math.score_team_2 }}</span></div>
+                    <div class="team-side">
+                        <img src="{{ math.team2.img.url }}">
+                        <div>{{ math.team2.name }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

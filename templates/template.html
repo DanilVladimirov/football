@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://kit.fontawesome.com/628c8d2499.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+
+<nav id="menu" style="width: 800px;">
+
+    <div class="menu-item-no" style="flex-grow: 0;cursor: pointer;" onclick="location.href='{% url 'start_page' %}'">
+        <div class="menu-text">
+            <img src="/static/chelsi.webp" style="width: 70px;margin-top: -25px;">
+        </div>
+    </div>
+
+    <div class="menu-item-no">
+        <div class="menu-text">
+            <a href="{% url 'news_page' %}">Новини</a>
+        </div>
+    </div>
+    <div class="menu-item highlight">
+        <div class="menu-text">
+            <a href="{% url 'matches' %}">Матчі</a>
+        </div>
+        <div class="sub-menu">
+            <div class="icon-box">
+                <div class="text">
+                    <div class="title" onclick="location.href='{% url 'future_page' %}'">Майбутні матчі<i
+                            class="far fa-arrow-right"></i></div>
+                    <div class="sub-text">переглянути список майбутніх матчів</div>
+                </div>
+            </div>
+            <div class="icon-box">
+                <div class="text">
+                    <div class="title" onclick="location.href='{% url 'past_page' %}'">Результати<i
+                            class="far fa-arrow-right"></i></div>
+                    <div class="sub-text">переглянути результати матчів</div>
+                </div>
+            </div>
+            <div class="sub-menu-holder"></div>
+        </div>
+    </div>
+
+    <div class="menu-item highlight">
+        <div class="menu-text">
+            <a href="#">Команди</a>
+        </div>
+        <div class="sub-menu">
+            <div class="icon-box">
+                <div class="text">
+                    <div class="title" onclick="location.href='{% url 'main_team' %}'">Основна команда<i
+                            class="far fa-arrow-right"></i></div>
+                    <div class="sub-text">переглянути склад основної команди</div>
+                </div>
+            </div>
+            <div class="icon-box">
+                <div class="text">
+                    <div class="title" onclick="location.href='{% url 'academy_team' %}'">Академія<i
+                            class="far fa-arrow-right"></i></div>
+                    <div class="sub-text">переглянути склад академії</div>
+                </div>
+            </div>
+            <div class="sub-menu-holder"></div>
+        </div>
+    </div>
+
+{#    <div class="menu-item">#}
+{#        <div class="menu-text">#}
+{#            <a href="#">Community</a>#}
+{#        </div>#}
+{#        <div class="sub-menu">#}
+{#            <div class="icon-box">#}
+{#                <div class="icon"><i class="far fa-satellite"></i></div>#}
+{#                <div class="text">#}
+{#                    <div class="title">Forum <i class="far fa-arrow-right"></i></div>#}
+{#                    <div class="sub-text">Join our passionate community.</div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="icon-box">#}
+{#                <div class="icon"><i class="fab fa-twitter-square"></i></div>#}
+{#                <div class="text">#}
+{#                    <div class="title">Twitter <i class="far fa-arrow-right"></i></div>#}
+{#                    <div class="sub-text">Follow us on twitter.</div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="icon-box">#}
+{#                <div class="icon"><i class="fab fa-twitch"></i></div>#}
+{#                <div class="text">#}
+{#                    <div class="title">Live Stream <i class="far fa-arrow-right"></i></div>#}
+{#                    <div class="sub-text">We stream content every day.</div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="sub-menu-holder"></div>#}
+{#        </div>#}
+{#    </div>#}
+</nav>
+<div style="min-height: 800px;">
+    {% block body %}
+
+    {% endblock %}
+</div>
+<div style="background: lightgray;padding: 45px;text-align: center;color: dimgray;">
+    © 2021 ФК «Челсі». Всі права захищені. Ні одна частина цього сайту не може бути використана без нашого письмогового
+    дозволу.
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+.matches {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.match {
+    padding: 10px;
+    margin: 10px;
+    border: 5px solid blue;
+}
+
+.status {
+    position: absolute;
+    margin-top: -23px;
+    color: white;
+    background: blue;
+    padding: 2px;
+    margin-left: 320px;
+}
+
+.match-name {
+    font-size: 30px;
+    word-break: break-word;
+    text-transform: uppercase;
+}
+
+.match-date {
+    color: dimgray;
+    font-size: 15px;
+}
+
+.team-side {
+    text-align: center;
+    width: 200px;
+}
+
+.team-side img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid lightgray;
+}
+
+.team-side div {
+    text-align: center;
+    word-break: break-word;
+}
+
+.score {
+    font-size: 40px;
+    padding-top: 25px;
+}
