@@ -13,8 +13,7 @@
 </head>
 <body>
 
-<nav id="menu" style="width: 800px;">
-
+<nav id="menu" style="width: 1200px">
     <div class="menu-item-no" style="flex-grow: 0;cursor: pointer;" onclick="location.href='{% url 'start_page' %}'">
         <div class="menu-text">
             <img src="/static/chelsi.webp" style="width: 70px;margin-top: -25px;">
@@ -71,36 +70,53 @@
             <div class="sub-menu-holder"></div>
         </div>
     </div>
+    <div class="menu-item-no">
+        <div class="menu-text">
+            <a href="{% url 'shop_page' %}">Магазин</a>
+        </div>
+    </div>
+    <div class="menu-item-no">
+        <div class="menu-text">
+            <a href="{% url 'cart_page' %}">Корзина</a>
+        </div>
+    </div>
+    {% if request.user.is_superuser %}
+        <div class="menu-item-no">
+            <div class="menu-text">
+                <a href="{% url 'orders_page' %}">Замовлення</a>
+            </div>
+        </div>
+    {% endif %}
 
-{#    <div class="menu-item">#}
-{#        <div class="menu-text">#}
-{#            <a href="#">Community</a>#}
-{#        </div>#}
-{#        <div class="sub-menu">#}
-{#            <div class="icon-box">#}
-{#                <div class="icon"><i class="far fa-satellite"></i></div>#}
-{#                <div class="text">#}
-{#                    <div class="title">Forum <i class="far fa-arrow-right"></i></div>#}
-{#                    <div class="sub-text">Join our passionate community.</div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="icon-box">#}
-{#                <div class="icon"><i class="fab fa-twitter-square"></i></div>#}
-{#                <div class="text">#}
-{#                    <div class="title">Twitter <i class="far fa-arrow-right"></i></div>#}
-{#                    <div class="sub-text">Follow us on twitter.</div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="icon-box">#}
-{#                <div class="icon"><i class="fab fa-twitch"></i></div>#}
-{#                <div class="text">#}
-{#                    <div class="title">Live Stream <i class="far fa-arrow-right"></i></div>#}
-{#                    <div class="sub-text">We stream content every day.</div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="sub-menu-holder"></div>#}
-{#        </div>#}
-{#    </div>#}
+    {#    <div class="menu-item">#}
+    {#        <div class="menu-text">#}
+    {#            <a href="#">Community</a>#}
+    {#        </div>#}
+    {#        <div class="sub-menu">#}
+    {#            <div class="icon-box">#}
+    {#                <div class="icon"><i class="far fa-satellite"></i></div>#}
+    {#                <div class="text">#}
+    {#                    <div class="title">Forum <i class="far fa-arrow-right"></i></div>#}
+    {#                    <div class="sub-text">Join our passionate community.</div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="icon-box">#}
+    {#                <div class="icon"><i class="fab fa-twitter-square"></i></div>#}
+    {#                <div class="text">#}
+    {#                    <div class="title">Twitter <i class="far fa-arrow-right"></i></div>#}
+    {#                    <div class="sub-text">Follow us on twitter.</div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="icon-box">#}
+    {#                <div class="icon"><i class="fab fa-twitch"></i></div>#}
+    {#                <div class="text">#}
+    {#                    <div class="title">Live Stream <i class="far fa-arrow-right"></i></div>#}
+    {#                    <div class="sub-text">We stream content every day.</div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="sub-menu-holder"></div>#}
+    {#        </div>#}
+    {#    </div>#}
 </nav>
 <div style="min-height: 800px;">
     {% block body %}

@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/news-style.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/category-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <div style="width: 1000px;margin: auto;">
+        <div style="display: flex;justify-content: space-around;">
+            <div style="width: 340px;height: 340px;"><img style="width: 100%;height: 100%;object-fit: cover;"
+                                                          src="{{ item.img.url }}"></div>
+            <div>
+                <div class="news-title" style="max-width: 400px;">{{ item.title }}</div>
+                <div style="font-size: 30px;">{{ item.price }} грн</div>
+
+                <form method="post" style="background: #dedede;padding: 30px;margin-top: auto;display: inline-block;">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ item.id }}" name="item_id">
+                    <input style="width: 40px;padding: 10px;" type="number" name="quantity" min="1" value="1">
+                    <button style="padding: 10px;width: 200px;background: #1e1ef7;color: white;font-size: 20px;border: none;"
+                            type="submit">В кошик
+                    </button>
+                </form>
+
+            </div>
+        </div>
+        <div style="font-size: 25px;font-weight: bold;">Опис</div>
+        <div style="display: inline-table;">
+            <hr style="border: 3px solid blue;width: 100px;">
+        </div>
+        <div style="font-size: 20px;">{{ item.desc }}</div>
+    </div>
+    <div style="display: flex;flex-wrap: wrap;width: 1000px;
+    justify-content: center;margin: auto;">
+        {% for item in items %}
+            <div onclick="location.href='{% url 'item_page' item.id %}'" class="card-item">
+                <div style="height: 300px;"><img src="{{ item.img.url }}"></div>
+                <div class="card-item-title">{{ item.title }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

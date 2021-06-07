@@ -1,0 +1,38 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/cart-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <div style="width: 800px;margin: auto;">
+        {% for order in orders %}
+            <div style="display: flex;">
+                <div>замовлення #{{ order.id }}</div>
+                <form method="post" style="margin-inline-start: auto;">
+                    {% csrf_token %}
+                    <button name="order_id" value="{{ order.id }}" class="button-ready">готовий</button>
+                </form>
+            </div>
+            <div style="background: #dddddd;padding: 10px;height: 100px;margin-bottom: 20px;">
+                <div>
+                    <div>замовник: {{ order.first_name }} {{ order.last_name }}</div>
+                    <div>телефон: {{ order.telephone }}</div>
+                    <div>адреса: {{ order.address }}</div>
+                    <div>побажання: {{ order.wishtext }}</div>
+                </div>
+            </div>
+            {% for item in order.items.all %}
+                <div class="item-card">
+                    <div class="item-qty">кількість: {{ item.quantity }}</div>
+                    <div class="item-content">
+                        <img src="{{ item.item.img.url }}">
+                        <div class="item-title">{{ item.item.title }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+
+    </div>
+{% endblock %}

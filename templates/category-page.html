@@ -1,0 +1,20 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/category-style.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/news-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <div class="news-title" style="text-align: center;">{{ category.title }}</div>
+    <hr style="border: 3px solid darkgray;width: 100px;">
+    <div style="display: flex;flex-wrap: wrap;width: 1000px;
+    justify-content: center;margin: auto;">
+        {% for item in items %}
+            <div onclick="location.href='{% url 'item_page' item.id %}'" class="card-item">
+                <div style="height: 300px;"><img src="{{ item.img.url }}"></div>
+                <div class="card-item-title">{{ item.title }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

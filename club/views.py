@@ -112,3 +112,117 @@ def academy_team_page(request):
 def player_page(request, player_id):
     data = {'player': Player.objects.get(id=player_id)}
     return render(request, 'player-page.html', data)
+
+
+def shop_page(request):
+    data = {}
+    data.update({'supercategs': SuperCategory.objects.all()})
+    return render(request, 'shop-page.html', data)
+
+
+def supercateg_page(request, categ_id):
+    data = {}
+    data.update({'supercateg': SuperCategory.objects.get(id=categ_id)})
+    return render(request, 'supercateg-page.html', data)
+
+
+def categ_page(request, categ_id):
+    data = {}
+    items = Category.objects.get(id=categ_id).items.all()
+
+    data.update({'items': items, 'category': Category.objects.get(id=categ_id)})
+    return render(request, 'category-page.html', data)
+
+
+def item_page(request, item_id):
+    data = {}
+    item = Item.objects.get(id=item_id)
+    recommend_items = item.category_set.filter()[0].items.order_by('-id').exclude(id=item.id)[:5]
+    data.update({'item': item, 'items': recommend_items})
+    cart = request.session.get('cart', {})
+
+    if request.POST:
+        item_cart = request.POST.get('item_id')
+        if len(cart) == 0:
+            request.session['cart'] = cart
+            item = [{'item': int(item_cart),
+                     'quantity': int(request.POST.get('quantity'))}]
+            request.session['cart'] = item
+            request.session.modified = True
+        else:
+            cart.append({'item': int(item_cart),
+                         'quantity': int(request.POST.get('quantity'))})
+            request.session.modified = True
+    return render(request, 'item-page.html', data)
+
+
+def cart_page(request):
+    cart = request.session.get('cart', {})
+    action = request.POST.get('action')
+
+    if request.POST and action == 'del':
+        for item in cart:
+            if int(request.POST.get('item_id')) == item.get('item'):
+                del cart[cart.index(item)]
+        request.session['cart'] = cart
+        request.session.modified = True
+
+    cart = request.session.get('cart', {})
+    cart_user = []
+    for item in cart:
+        cart_user.append({'item': Item.objects.get(id=item.get('item')),
+                          'quantity': item.get('quantity')})
+    data = {'cart': cart_user}
+
+    if request.POST and action == 'order':
+        telephone = request.POST.get('tel')
+        f_name = request.POST.get('f_name')
+        l_name = request.POST.get('l_name')
+        address = request.POST.get('address')
+        wish = request.POST.get('wish')
+        if wish is None:
+            wish = " "
+        order_items = []
+        for item in cart_user:
+            new_order_item = OrderItem.objects.create(item=item.get('item'),
+                                                      quantity=item.get('quantity'))
+            new_order_item.save()
+            order_items.append(new_order_item)
+        new_order = Order.objects.create(telephone=telephone,
+                                         first_name=f_name,
+                                         last_name=l_name,
+                                         address=address,
+                                         wishtext=wish)
+        for item in order_items:
+            new_order.items.add(item)
+        new_order.save()
+        request.session['cart'] = {}
+        request.session.modified = True
+
+        cart = request.session.get('cart', {})
+        cart_user = []
+        for item in cart:
+            cart_user.append({'item': Item.objects.get(id=item.get('item')),
+                              'quantity': item.get('quantity')})
+        data = {'cart': cart_user, 'good': True}
+
+    return render(request, 'cart-page.html', data)
+
+
+def clear_cart(request):
+    request.session['cart'] = {}
+    request.session.modified = True
+
+    return render(request, 'cart-page.html')
+
+
+def orders_page(request):
+    data = {}
+
+    if request.POST:
+        order = Order.objects.get(id=request.POST.get('order_id'))
+        order.delete()
+    orders = Order.objects.all()
+    data.update({'orders': orders})
+
+    return render(request, 'orders-page.html', data)

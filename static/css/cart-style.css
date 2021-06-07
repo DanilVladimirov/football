@@ -1,0 +1,96 @@
+.form-order {
+    width: 500px;
+    display: grid;
+    margin: auto;
+    padding: 10px;
+    background: #3737e8;
+}
+
+.form-order input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-order textarea {
+    margin-bottom: 10px;
+    max-width: 495px;
+    min-width: 495px;
+}
+
+.form-order button {
+    width: 100px;
+    height: 40px;
+    background: black;
+    color: white;
+    font-size: 20px;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.form-order button:hover {
+    background-color: white;
+    color: black;
+    transition: all 0.2s ease;
+}
+
+.empty-text {
+    width: 500px;
+    margin: auto;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.item-card {
+    background: #dddddd;
+    padding: 10px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.item-qty {
+    background: blue;
+    color: white;
+    padding: 4px;
+    display: initial;
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 700px;
+}
+
+.item-content {
+    display: flex;
+    align-items: center;
+}
+
+.item-content img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.item-title {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.form-del {
+    margin-inline-start: auto;
+}
+
+.form-del button {
+    background: #ff3131;
+    padding: 5px;
+    font-size: 15px;
+    color: white;
+    border: none;
+    width: 30px;
+}
+
+.button-ready {
+    background: #ff3131;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-bottom: 10px;
+}

@@ -14,7 +14,14 @@ urlpatterns = [
     path('matches/', all_matches_page, name='matches'),
     path('main_team/', main_team_page, name='main_team'),
     path('academy_team/', academy_team_page, name='academy_team'),
-    path('player/<int:player_id>/', player_page, name='player_page')
+    path('player/<int:player_id>/', player_page, name='player_page'),
+    path('shop/', shop_page, name='shop_page'),
+    path('supercategory/<int:categ_id>/', supercateg_page, name='supercategory_page'),
+    path('category/<int:categ_id>/', categ_page, name='categ_page'),
+    path('item/<int:item_id>/', item_page, name='item_page'),
+    path('cart/', cart_page, name='cart_page'),
+    path('clear/', clear_cart),
+    path('orders/', orders_page, name='orders_page')
 ]
 
 urlpatterns += static(settings.MEDIA_URL,

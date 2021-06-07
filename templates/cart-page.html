@@ -1,0 +1,47 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/cart-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    {% if good %}
+        <div class="empty-text">Дякуємо за замовлення !</div>
+    {% else %}
+        {% if not cart %}
+            <div class="empty-text">тут пусто :(</div>
+        {% endif %}
+    {% endif %}
+
+    <div style="width: 800px;margin: auto;">
+        {% for item in cart %}
+            <div class="item-card">
+                <div class="item-qty">
+                    кількість: {{ item.quantity }}</div>
+                <div class="item-content">
+                    <img src="{{ item.item.img.url }}">
+                    <div class="item-title">{{ item.item.title }}</div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ item.item.id }}" name="item_id">
+                        <button type="submit"
+                                style=""
+                                name="action" value="del">X
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        {% if cart %}
+            <form method="post" class="form-order">
+                {% csrf_token %}
+                <input type="text" name="f_name" placeholder="Ім'я" required>
+                <input type="text" name="l_name" placeholder="Призвіще" required>
+                <input type="tel" name="tel" placeholder="073-424-2434" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                <input type="text" name="address" placeholder="Адресса" required>
+                <textarea placeholder="Побажання" name="wishtext"></textarea>
+                <button name="action" value="order">купити</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

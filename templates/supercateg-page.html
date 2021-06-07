@@ -1,0 +1,18 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/shop-style.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/news-style.css" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <div class="news-title" style="text-align: center;">Категорії</div>
+    <hr style="border: 3px solid darkgray;width: 100px;">
+    <div class="categories-container">
+        {% for categ in supercateg.categories.all %}
+            <div onclick="location.href='{% url 'categ_page' categ.id %}'" class="card-category">
+                <div>{{ categ.title }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
