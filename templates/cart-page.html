@@ -21,7 +21,7 @@
                 <div class="item-content">
                     <img src="{{ item.item.img.url }}">
                     <div class="item-title">{{ item.item.title }}</div>
-                    <form method="post">
+                    <form method="post" class="form-del">
                         {% csrf_token %}
                         <input type="hidden" value="{{ item.item.id }}" name="item_id">
                         <button type="submit"
