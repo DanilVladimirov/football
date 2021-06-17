@@ -20,7 +20,6 @@ urlpatterns = [
     path('category/<int:categ_id>/', categ_page, name='categ_page'),
     path('item/<int:item_id>/', item_page, name='item_page'),
     path('cart/', cart_page, name='cart_page'),
-    path('clear/', clear_cart),
     path('orders/', orders_page, name='orders_page')
 ]
 

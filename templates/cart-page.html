@@ -37,9 +37,9 @@
                 {% csrf_token %}
                 <input type="text" name="f_name" placeholder="Ім'я" required>
                 <input type="text" name="l_name" placeholder="Призвіще" required>
-                <input type="tel" name="tel" placeholder="073-424-2434" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                <input type="tel" name="tel" placeholder="0734242434" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
                 <input type="text" name="address" placeholder="Адресса" required>
-                <textarea placeholder="Побажання" name="wishtext"></textarea>
+                <textarea placeholder="Побажання" name="wish"></textarea>
                 <button name="action" value="order">купити</button>
             </form>
         {% endif %}

@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from datetime import date
 
 
-def age(birth_date):
-    today = date.today()
-    y = today.year - birth_date.year
-    if today.month < birth_date.month or today.month == birth_date.month and today.day < birth_date.day:
-        y -= 1
-    return y
+# def age(birth_date):
+#     today = date.today()
+#     y = today.year - birth_date.year
+#     if today.month < birth_date.month or today.month == birth_date.month and today.day < birth_date.day:
+#         y -= 1
+#     return y
 
 
 def last_news_returner():
@@ -209,16 +209,10 @@ def cart_page(request):
     return render(request, 'cart-page.html', data)
 
 
-def clear_cart(request):
-    request.session['cart'] = {}
-    request.session.modified = True
-
-    return render(request, 'cart-page.html')
-
-
 def orders_page(request):
     data = {}
-
+    if not request.user.is_superuser:
+        return redirect('start_page')
     if request.POST:
         order = Order.objects.get(id=request.POST.get('order_id'))
         order.delete()

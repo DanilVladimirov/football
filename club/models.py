@@ -1,7 +1,16 @@
+import os
+import random
 from datetime import date
 from django.db import models
 from django.db.models.signals import post_delete, pre_delete
 from django.dispatch import receiver
+
+
+def file_path(instance, filename):
+    basefilename, file_extension = os.path.splitext(filename)
+    chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
+    randomstr = ''.join((random.choice(chars)) for x in range(10))
+    return f'{basefilename}_{randomstr}{file_extension}'
 
 
 class Slider(models.Model):
@@ -12,7 +21,7 @@ class Slider(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=100, default='')
     text = models.TextField(default='')
-    img = models.ImageField()
+    img = models.ImageField(upload_to=file_path)
     time = models.DateField(auto_now=True)
 
     def __str__(self):
@@ -21,7 +30,7 @@ class News(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=100, default='')
-    img = models.ImageField()
+    img = models.ImageField(upload_to=file_path)
 
     def __str__(self):
         return self.name
@@ -42,7 +51,7 @@ class Match(models.Model):
 
 class Sponsor(models.Model):
     title = models.CharField(max_length=100, default='')
-    logo = models.ImageField()
+    logo = models.ImageField(upload_to=file_path)
     url = models.URLField(default='')
 
     def __str__(self):
@@ -51,7 +60,7 @@ class Sponsor(models.Model):
 
 class Nationality(models.Model):
     country_name = models.CharField(max_length=100)
-    logo = models.ImageField()
+    logo = models.ImageField(upload_to=file_path)
 
     def __str__(self):
         return self.country_name
@@ -85,7 +94,7 @@ class Player(models.Model):
     height = models.FloatField(default=0.0)
     weight = models.FloatField(default=0.0)
     team = models.CharField(choices=CHOICES_TEAM, max_length=20)
-    img = models.ImageField(default='gaga.jpeg')
+    img = models.ImageField(default='gaga.jpeg', upload_to=file_path)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -93,7 +102,7 @@ class Player(models.Model):
 
 class Item(models.Model):
     title = models.CharField(max_length=100, default='')
-    img = models.ImageField()
+    img = models.ImageField(upload_to=file_path)
     desc = models.TextField(default='')
     count = models.PositiveIntegerField(default=0)
     price = models.FloatField(default=0.0)
